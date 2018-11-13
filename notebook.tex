@@ -1,0 +1,591 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Renou\_code}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}545}]:} \PY{k}{class} \PY{n+nc}{PostingsWrapper}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    This postings wrapper creates a link between the index dictionary and the postings list.}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{postings\PYZus{}list}\PY{p}{,} \PY{n}{posting}\PY{p}{,} \PY{n}{postings\PYZus{}index}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{frequency} \PY{o}{=} \PY{l+m+mi}{1}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{postings\PYZus{}index} \PY{o}{=} \PY{n}{postings\PYZus{}index}
+                  \PY{n}{postings\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{posting}\PY{p}{]}\PY{p}{)}
+                  
+          
+              \PY{k}{def} \PY{n+nf}{add\PYZus{}posting}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{postings\PYZus{}list}\PY{p}{,} \PY{n}{posting}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{        }
+          \PY{l+s+sd}{        Adds a posting to the postings list, at correct index according to the term}
+          \PY{l+s+sd}{        Only called if the term has yet not corresponding postings.}
+          \PY{l+s+sd}{        }
+          \PY{l+s+sd}{        :param postings\PYZus{}list: postings list, an attribute of the index.}
+          \PY{l+s+sd}{        :param posting: the posting to be added, extracted from a list of tokens and docids.}
+          \PY{l+s+sd}{        :return: returns nothing}
+          \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                  \PY{k}{if} \PY{n}{posting} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{postings\PYZus{}list}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{postings\PYZus{}index}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{postings\PYZus{}list}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{postings\PYZus{}index}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{posting}\PY{p}{)}
+                      \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{frequency} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+          
+          
+          \PY{k}{class} \PY{n+nc}{index}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    Processes the tweets.csv file or any file containing the same structure, creates}
+          \PY{l+s+sd}{    an inverted index. This is a dictionary terms as keys and an instance of the PostingsWrapper }
+          \PY{l+s+sd}{    class as value. Also creates a seperate postings list, also as an attribute, which contains}
+          \PY{l+s+sd}{    all tweet ids where each term occured.}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{file}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{        :param file: path to tweets.csv file.}
+          \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data\PYZus{}index} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{preprocess}\PY{p}{(}\PY{n}{file}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{postings\PYZus{}list} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{create\PYZus{}index}\PY{p}{(}\PY{p}{)}
+          
+              \PY{k}{def} \PY{n+nf}{preprocess}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{file}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{        Opens raw text, spits it into lines comprised of six columns, stores in intermediary}
+          \PY{l+s+sd}{        tab\PYZus{}seperated variable.}
+          \PY{l+s+sd}{        Then proceeds to normalize this while transfering it to data variable. Everything is lowered}
+          \PY{l+s+sd}{        and compared to a regex which desires to only extract usernames and tokens containing }
+          \PY{l+s+sd}{        only letters. All irrelevant columns are disgarded.}
+          \PY{l+s+sd}{        }
+          \PY{l+s+sd}{        :param file: path to tweets.csv file.}
+          \PY{l+s+sd}{        :return: data, containing tweet IDs with corresponding tweets }
+          \PY{l+s+sd}{        and a dictionary of all terms and original text}
+          \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                  \PY{k+kn}{import} \PY{n+nn}{re}
+                  
+                  \PY{n}{raw\PYZus{}text} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{file}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+                  \PY{n}{tab\PYZus{}seperated} \PY{o}{=} \PY{p}{[}\PY{n}{item}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{raw\PYZus{}text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+          
+                  \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{tab\PYZus{}seperated}\PY{p}{:}
+                      \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{line}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                          \PY{n}{tab\PYZus{}seperated}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{line}\PY{p}{)}
+          
+                  \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n}{data\PYZus{}index} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{tab\PYZus{}seperated}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{tab\PYZus{}seperated}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{tab\PYZus{}seperated}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                      \PY{n}{data\PYZus{}index}\PY{p}{[}\PY{n}{tab\PYZus{}seperated}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{tab\PYZus{}seperated}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}
+                      
+                  \PY{n}{data} \PY{o}{=} \PY{n}{data}
+          
+                  \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+                      \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{newline}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                      \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[\PYZca{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{s]+.[\PYZca{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{W}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{s]+|[\PYZca{} ]+}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{.[\PYZca{} ]+ |[\PYZca{}a\PYZhy{}zA\PYZhy{}Zäöüß}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{s]+ | }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d+|[\PYZca{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{s]+.[\PYZca{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{W}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{s]+| https?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                      \PY{c+c1}{\PYZsh{}line[1] = re.sub(\PYZsq{}https?:\PYZbs{}/\PYZbs{}/[\PYZca{}\PYZbs{}s]*|[\PYZca{}a\PYZhy{}z\PYZbs{}s]\PYZsq{}, \PYZsq{}\PYZsq{}, line[1])}
+          
+                  \PY{k}{return} \PY{n}{data}\PY{p}{,} \PY{n}{data\PYZus{}index}
+          
+              \PY{k}{def} \PY{n+nf}{create\PYZus{}index}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{        Creates the index and postings list.}
+          \PY{l+s+sd}{        :return: index, a dictionary having a unique term as key and a PostingsWrapper instance}
+          \PY{l+s+sd}{        as value, and postings\PYZus{}list, a large list of lists containing all postings for each unique}
+          \PY{l+s+sd}{        term.}
+          \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+          
+                  \PY{c+c1}{\PYZsh{} We initialize the index, the postings list, and an intermediary tokens\PYZus{}and\PYZus{}ids variable.}
+                  \PY{n}{index} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+                  \PY{n}{postings\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n}{tokens\PYZus{}and\PYZus{}ids} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+                  \PY{c+c1}{\PYZsh{} For each line in data, we split each tweet by whitespace into tokens.}
+                  \PY{c+c1}{\PYZsh{} As a simple preprocessing step we check to make sure that the length of each token is}
+                  \PY{c+c1}{\PYZsh{} \PYZgt{} 0 before appending the token and its tweet ID to the tokens\PYZus{}and\PYZus{}ids list.}
+                  \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{corpus} \PY{k}{import} \PY{n}{stopwords}
+                  \PY{n}{stop\PYZus{}words} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{stopwords}\PY{o}{.}\PY{n}{words}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{english}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{stop\PYZus{}words2} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{stopwords}\PY{o}{.}\PY{n}{words}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{german}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+                  
+                  \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{token} \PY{o+ow}{in} \PY{p}{[}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}  \PY{k}{if} \PY{p}{(}\PY{o+ow}{not} \PY{n}{x} \PY{o+ow}{in} \PY{n}{stop\PYZus{}words}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{o+ow}{not} \PY{n}{x} \PY{o+ow}{in} \PY{n}{stop\PYZus{}words2}\PY{p}{)}\PY{p}{]}\PY{p}{:}
+                          \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{token}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{:}
+                              \PY{n}{tokens\PYZus{}and\PYZus{}ids}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{token}\PY{p}{,} \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{} We sort our list of all tokens.}
+                  
+                  \PY{n}{tokens\PYZus{}and\PYZus{}ids}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+          
+                  \PY{c+c1}{\PYZsh{} The postings\PYZus{}index variable we initialize here will be used as we instantiate}
+                  \PY{c+c1}{\PYZsh{} PostingsWrapper objects. This integer will enable us to keep track of the index}
+                  \PY{c+c1}{\PYZsh{} of the postings list where all of a given term\PYZsq{}s postings are contained.}
+                  
+                  \PY{n}{postings\PYZus{}index} \PY{o}{=} \PY{l+m+mi}{0}
+                  
+                  \PY{c+c1}{\PYZsh{} For each line in tokens\PYZus{}and\PYZus{}ids, we check to make sure it is not already in our index.}
+                  \PY{c+c1}{\PYZsh{} If it is not we add it, create a corresponding PostingsWrapper Object that will}
+                  \PY{c+c1}{\PYZsh{} add to the postings list as it is initialized. The PostingsWrapper will also keep track}
+                  \PY{c+c1}{\PYZsh{} of frequency for us.}
+                  \PY{c+c1}{\PYZsh{} Having done this we then increment the postings\PYZus{}index variable by 1.}
+                  \PY{c+c1}{\PYZsh{} If it is found that the term is already present in our index, we simply add the new }
+                  \PY{c+c1}{\PYZsh{} posting to its postings list using the PostingsWrapper.add\PYZus{}posting method.}
+                  \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{tokens\PYZus{}and\PYZus{}ids}\PY{p}{:}
+                      \PY{k}{if} \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{index}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{index}\PY{p}{[}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{PostingsWrapper}\PY{p}{(}\PY{n}{postings\PYZus{}list}\PY{p}{,} \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{postings\PYZus{}index}\PY{p}{)}
+                          \PY{n}{postings\PYZus{}index} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                      \PY{k}{else}\PY{p}{:}
+                          \PY{n}{index}\PY{p}{[}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{add\PYZus{}posting}\PY{p}{(}\PY{n}{postings\PYZus{}list}\PY{p}{,} \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          
+                  \PY{k}{return} \PY{n}{index}\PY{p}{,} \PY{n}{postings\PYZus{}list}
+                      
+              \PY{k}{def} \PY{n+nf}{get\PYZus{}frequency}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{term}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{        Pulls frequency from wrapper of term}
+          \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                  \PY{k}{try}\PY{p}{:}
+                      \PY{k}{return} \PY{n}{index}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{n}{term}\PY{p}{]}\PY{o}{.}\PY{n}{frequency}
+                  \PY{k}{except}\PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Term not found.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              
+              \PY{k}{def} \PY{n+nf}{All\PYZus{}frequencies}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        return the term and frequencies in descending order}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{n}{frequencies} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{k}{for} \PY{n}{term} \PY{o+ow}{in} \PY{n}{index}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{frequencies}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{index}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{n}{term}\PY{p}{]}\PY{o}{.}\PY{n}{frequency}\PY{p}{,} \PY{n}{term}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{return} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{frequencies}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                  
+              \PY{k}{def} \PY{n+nf}{query\PYZus{}one}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{term}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{        Queries for a term.}
+          \PY{l+s+sd}{        :param term: query term}
+          \PY{l+s+sd}{        :return: postings list corresponding to query term, or error message if no results.}
+          \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                  \PY{k}{try}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{posting} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{postings\PYZus{}list}\PY{p}{[}\PY{n}{index}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{n}{term}\PY{p}{]}\PY{o}{.}\PY{n}{postings\PYZus{}index}\PY{p}{]}\PY{p}{:}
+                          \PY{n+nb}{print}\PY{p}{(}\PY{n}{posting}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data\PYZus{}index}\PY{p}{[}\PY{n}{posting}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{k}{except}\PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No results for query.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+              \PY{k}{def} \PY{n+nf}{query\PYZus{}and}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{term1}\PY{p}{,} \PY{n}{term2}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{        Queries for the intersection of two terms.}
+          \PY{l+s+sd}{        :param term1: first term}
+          \PY{l+s+sd}{        :param term2: second term}
+          \PY{l+s+sd}{        :return: returns intersection of postings lists of both terms.}
+          \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                  
+                  \PY{c+c1}{\PYZsh{} Here we compare the two lists and create iterators to help us compare the two postings lists}
+                  \PY{k}{def} \PY{n+nf}{And}\PY{p}{(}\PY{n}{post1}\PY{p}{,}\PY{n}{post2}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{post1}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{post2}\PY{p}{)}\PY{p}{:}    
+                          \PY{n}{iterpost1} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{post1}\PY{p}{)}
+                          \PY{n}{iterpost2} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{post2}\PY{p}{)}
+                      \PY{k}{else}\PY{p}{:}
+                          \PY{n}{iterpost1} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{post2}\PY{p}{)}
+                          \PY{n}{iterpost2} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{post1}\PY{p}{)}
+                          
+                  \PY{c+c1}{\PYZsh{} Here we initialize an empty intersection variable which will (hopefully) be filled.}
+                      \PY{n}{intersection} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                      
+                      \PY{n}{current1} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{iterpost1}\PY{p}{)}
+                      \PY{n}{current2} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{iterpost2}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} This is the loop that iterates over the members of each postings list, comparing them.}
+                  \PY{c+c1}{\PYZsh{} If there is a match it will be added to the intersection.}
+                      \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                          \PY{k}{if} \PY{n}{current1} \PY{o}{==} \PY{n}{current2}\PY{p}{:}
+                              \PY{n}{intersection}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{current1}\PY{p}{)}
+                              \PY{k}{try}\PY{p}{:}
+                                  \PY{n}{current1} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{iterpost1}\PY{p}{)}
+                                  \PY{n}{current2} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{iterpost2}\PY{p}{)}
+                              \PY{k}{except}\PY{p}{:}
+                                  \PY{k}{break}
+                          \PY{k}{elif} \PY{n}{current1} \PY{o}{\PYZlt{}} \PY{n}{current2}\PY{p}{:}
+                              \PY{k}{try}\PY{p}{:}
+                                  \PY{n}{current1} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{iterpost1}\PY{p}{)}
+                              \PY{k}{except}\PY{p}{:}
+                                  \PY{k}{break}
+                          \PY{k}{else}\PY{p}{:}
+                              \PY{k}{try}\PY{p}{:}
+                                  \PY{n}{current2} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{iterpost2}\PY{p}{)}
+                              \PY{k}{except}\PY{p}{:}
+                                  \PY{k}{break}
+                      \PY{c+c1}{\PYZsh{} Here we print each text and id number found in intersection}
+                      \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{intersection}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{intersection}\PY{p}{:}
+                              \PY{n+nb}{print}\PY{p}{(} \PY{n}{i}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data\PYZus{}index}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                              
+                      \PY{k}{else}\PY{p}{:}
+                          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No results for query.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                      \PY{c+c1}{\PYZsh{} Here we access the postings list for each term, assign them to variables.}
+          \PY{c+c1}{\PYZsh{}         if type(term1) == list:}
+          \PY{c+c1}{\PYZsh{}             try:}
+          \PY{c+c1}{\PYZsh{}                 postings2 = self.postings\PYZus{}list[index.index[term2].postings\PYZus{}index]}
+          \PY{c+c1}{\PYZsh{}                 return And(term1, postings2)}
+          \PY{c+c1}{\PYZsh{}             except:}
+          \PY{c+c1}{\PYZsh{}                 return None}
+                  \PY{k}{try}\PY{p}{:}
+                      \PY{n}{postings1} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{postings\PYZus{}list}\PY{p}{[}\PY{n}{index}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{n}{term1}\PY{p}{]}\PY{o}{.}\PY{n}{postings\PYZus{}index}\PY{p}{]}
+                      \PY{n}{postings2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{postings\PYZus{}list}\PY{p}{[}\PY{n}{index}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{n}{term2}\PY{p}{]}\PY{o}{.}\PY{n}{postings\PYZus{}index}\PY{p}{]}
+                      \PY{k}{return} \PY{n}{And}\PY{p}{(}\PY{n}{postings1}\PY{p}{,} \PY{n}{postings2}\PY{p}{)}
+                  \PY{k}{except}\PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error: 1 or more terms not found.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}     def query\PYZus{}three(self, term1, term2, term3):}
+          \PY{c+c1}{\PYZsh{}         self.query\PYZus{}and(self.query\PYZus{}and(term1,term2),term3)}
+              
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}546}]:} \PY{n}{renou\PYZus{}index} \PY{o}{=} \PY{n}{index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweets.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}547}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{renou\PYZus{}index3.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+              \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{renou\PYZus{}index}\PY{p}{,} \PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}548}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{renou\PYZus{}index3.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+              \PY{n}{index} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}555}]:} \PY{c+c1}{\PYZsh{}index.query\PYZus{}one(\PYZsq{}fr\PYZsq{})}
+          \PY{c+c1}{\PYZsh{}index.query\PYZus{}one(\PYZsq{}and\PYZsq{})}
+          \PY{n}{index}\PY{o}{.}\PY{n}{query\PYZus{}and}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nacht}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{schlafen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1003063075333922821 einfach befriedigend mitten in der nacht aus dem offenen fenster zu sehen und zu wissen dass gerade alle schlafen, als wär man der einzige mensch den es gerade gibt 
+
+1009499399972642816 @the\_necrosis @robin\_urban Mein Betreuer wusste grob wegen \#CRD und \#non24h Bescheid. Wann waren die Termine mit ihm? Später vormittag. Das hat mich so gestresst, dass ich die Nacht vorher noch später erst schlafen konnte als eh schon. (War ja ohne \#orphanmedi)[NEWLINE]Auch sicher keine \#Inklusion. 
+
+1011758043841916930 ich kann die letzten tage wieder besser schlafen und es ist so entlastend, mal mehr als vier stunden pro nacht zu schlafen obwohl man eigentlich ausschlafen könnte 
+
+1016073619791925250 Gute Nacht Leute ich geh dann mal Schlafen👋🏻[NEWLINE]\#Faultier \#Love \#JaDasBinIch \#BinIchNichtHübsch https://t.co/uFX9Qwwoxu 
+
+960632815414075392 @despacitolea @Polwnn @SofiStorm22 Ich werd am Valentinstag schlafen weil ich die Nacht durchschneiden muss \#goals \#love 
+
+962473245520941056 Als ob er schlafen gegangen ist ohne gute Nacht oder so zu schreiben :( 
+
+963523476685578240 Eine wilde Nacht in den Bergen der Heimat - schon -32 Grad auf der Alp Hintergräppelen im Toggenburg und -36 Grad auf der Glattalp https://t.co/ClAp1BrM88 \#uhuerechalt - da wird der @Kryophil heute Nacht nicht schlafen \#Schweiz \#wetter 
+
+974795567711875072 @twittonium @Fotobiene Fotobiene ist gern ein bisschen experimentell polemisch, um zu schauen, was als nächstes passiert 😄[NEWLINE][NEWLINE]Und ich gehe jetzt schlafen![NEWLINE]Gute Nacht allerseits ✨🌙 
+
+975515873875300354 @VergessenesHerz ..dir sanft über die haut streichle mich enger an dich schmiege und dir sanft durch die haare streichle und dich auf die stirn küsse als du eingeschlafen bist.. werd hier bleiben und die nacht auf dich aufpassen damit du gut schlafen kannst :* 
+
+976608314153930752 Ist ja nicht so, als hätte ich es gewusst{\ldots} Keine Ahnung wie vielte Nacht seit Wochen, aber ich kann nicht schlafen. Heißt morgen wieder schön müde in den Tag. Ich freue mich jetzt schon. https://t.co/iI1yBXACYA 
+
+980231817860206592 Ich fersuche jetzt zu schlafen 💤😴 ob ich nicht müde 😑 bin aber ich habe Kopf schmerzen als so fersuche ich es jetzt. Gute Nacht Leute. 💤😴 https://t.co/ck52dG9ipk 
+
+983848050232905728 Ich glaub heute Nacht kann ich das mit dem schlafen Knicken. Habe für die 18+ Beiträge recherchiert und schon mehr echte Morde gesehen als ich eigentlich will. https://t.co/orrU5crTWp 
+
+984686263054884864 Wie ich gerade gesehen habe, ist heute Freitag der 13. Erklärt diesen angsteinflößenden Horror, den ich heute Nacht geträumt habe 😱 Würde ich daraus ein Buch machen, könnten meine Leser nicht mehr ruhig schlafen. Mann, bin ich gerade verstört {\ldots} [NEWLINE][NEWLINE]\#freitagder13te \#Horror \#Buch 
+
+986386986343727105 Heute mal kein nachtgrind, will einfach mal etwas früher schlafen gehen als sonst plus eklige kopfschmerzen{\ldots} wünsche euch allen trotzdessen eine gute nacht ✨☄️ 
+
+987118347815878657 @mavaho2 @blumedri @HuhnUschi @Lilly\_HD\_Neu @OliverSenst @zickenalarm1900 @ThomasRaue @webaxvita @danny\_23032000 @Platoon100 Dann sind wir uns ja im groben einig und können schlafen gehen.Respektvoll schreiben war nett. Gute Nacht 
+
+988552072009220096 So, ich werde mal schlafen gehen. Ich bin zwar immer noch in diesem beschissenen Tief und es geht mir nicht so gut, aber immerhin besser als gestern und der Tag war einigermaßen gut. Danke für die Unterhaltungen heute. :) Ich wünsche euch eine gute Nacht und schlaft schön. 
+
+989889332948426753 @Lassdichgrusche @GrillJimmy @\_love\_not\_hate\_ @DoggoNonGrata Dieser Love Overkill! Ich weiß nicht ob ich heute Nacht aus lauter Aufregung überhaupt schlafen kann 😅 
+
+999002626955063296 Hab mir gerade son Blackhead-Removal auf Facebook angeschaut. Eventuell bin ich etwas traumatisiert. Ein war gewordener Albtraum, bei dem es aussieht als würde man ganz viele kleine dicke Maden ausm Gesicht drücken. [NEWLINE][NEWLINE]Werde heute Nacht nicht schlafen können. 
+
+999800701776736258 uff omg ich bin raus onkel klaus ich schau das morgen weiter wenn es hell ist gute nacht als ob ich schlafen kann fml 
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}558}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{index}\PY{o}{.}\PY{n}{All\PYZus{}frequencies}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+          \PY{n}{index}\PY{o}{.}\PY{n}{get\PYZus{}frequency}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{für}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[(5207, 'mehr'), (4493, 'happy'), (4225, 'mal'), (4164, 'really'), (3782, "i'm")]
+Term not found.
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
