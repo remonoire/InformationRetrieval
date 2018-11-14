@@ -23,22 +23,22 @@ The inverter will return the reference to the inverted index and postings list i
 
 Task 3
 
-When indexes get very large, it becomes difficult to store them in memory, and we must move then to disk. For dynamic collections this is problematic. Each time a new term occures in our document collection, our a new posting occurs for an existing term, if we wish to maintain our index we must recalculate it entirely. This will occur very often, incurring high costs and greatly reducing the user experience. Logarithmic merging is one technique used to mitigate these problems.
+When indexes get very large, it becomes difficult to store them in memory, and we must move then to disk. For dynamic collections this is particularly problematic. Each time we wish to update our index with new terms or postings, we must recalculate it entirely while merging the new elements. This will occur very often, incurring high costs and greatly reducing the user experience during the merge. Logarithmic merging is one technique used to mitigate these problems.
 
-We have an index of size n that is stored in memory (m0). We also have indexes that are stored on disk in bins, which are organized increasingly according to size.  The size of the indexes on disk is n*(2^k) where k is the position of the bin, starting from zero. So we have bins b0, b1, b2 ... bx. PLEASE EDIT THIIIIIS!!!JIDJWIDJIWDJWI
+Logarithmic merging functions roughly as follows:
 
-When m0 reaches size n, it is stored in a temporary location m1. m1 is merged to b0. b0 is thus filled with the former contents of m0. As m0 is once again filled to n, the contents are stored in m1. Because b0 is already filled, we must merge m1 and b0, restructuring their contents into b1. m0 and b0 are now again empty.
+We have an index, m0, of size n that is stored in memory. We also have indexes that are stored on disk in bins, which are organized according to increasing size.  The size of each bin is n*(2^k) where k is the position of the bin in the line of bins, starting from zero. We thus have bins b0, b1, b2 ... bx. Notice that the size of the bins increases logarithmically. PLEASE EDIT THIIIIIS TO MAKE THE  NUMBERS PRETTY SUBSCRIPTS
+
+When m0 is populated up to size n, we begin merging it to b0. To do this it is initialy stored in a temporary location m1. m1 is merged to b0, and b0 is thus filled with the former contents of m0. As m0 is once again filled to n, the contents are once again stored in m1 in order to prepare a merge to disk. However, we cannot merge to b0, because it has already been completely filled. We will instead merge m1 and b0, restructuring their contents into b1. m0 and b0 are now again empty and prepared to accept new elements. This process continues, continually creating bins of greater size in order to accomodate new terms. When b0 and b1 are full, their contents are merged and restructured into b2, and so on.
+
+As a result of this logarithmic merging process, we will have many small merge operations and relatively few large merge operations as we update our indexes. Logarithmic merging is much more efficient.
+
+However this technique does have certain disadvantages. We no longer have one index, but many seperate indexes. This results in a slower query process. Likewise, we run into complications should we wish to remove terms or postings (although one can quickly compensate for this by passing query results through a filter).
 
 
-#We need to figure out how to generalize this paragprah into more bins!!
 
 
 
 
-
-
-Advantages: Scales dynamically. Getting the most out of our memory. Over time merging is more efficient. 
-
- 
 
 potential disadvantgae: searching multiple indexes and having to merge results. Makes true deletion worse, also vector filtering is possible. 
