@@ -1,0 +1,44 @@
+Task 2
+
+1. What information does the task description contain that the master gives to a parser?
+
+Master must tell the parser what subset of the corpus to parse and how it must portion the index it creates.
+
+
+2. What information does the parser report back to master upon completion of the task?
+
+The parser communicates that it has completed its task, and reports back the references to each portion of the index it has created.
+
+
+3. What information does the task description contain that the master gives to an inverter?
+
+The master communicates to the indexer the locations of each of the subindexes for which it must create an inverted index and postings list.
+
+
+4. What informatino does the inverter report back to the master upon completion of the ask?
+
+The inverter will return the reference to the inverted index and postings list it has created.
+
+
+
+Task 3
+
+When indexes get very large, it becomes difficult to store them in memory, and we must move then to disk. For dynamic collections this is problematic. Each time a new term occures in our document collection, our a new posting occurs for an existing term, if we wish to maintain our index we must recalculate it entirely. This will occur very often, incurring high costs and greatly reducing the user experience. Logarithmic merging is one technique used to mitigate these problems.
+
+We have an index of size n that is stored in memory (m0). We also have indexes that are stored on disk in bins, which are organized increasingly according to size.  The size of the indexes on disk is n*(2^k) where k is the position of the bin, starting from zero. So we have bins b0, b1, b2 ... bx. PLEASE EDIT THIIIIIS!!!JIDJWIDJIWDJWI
+
+When m0 reaches size n, it is stored in a temporary location m1. m1 is merged to b0. b0 is thus filled with the former contents of m0. As m0 is once again filled to n, the contents are stored in m1. Because b0 is already filled, we must merge m1 and b0, restructuring their contents into b1. m0 and b0 are now again empty.
+
+
+#We need to figure out how to generalize this paragprah into more bins!!
+
+
+
+
+
+
+Advantages: Scales dynamically. Getting the most out of our memory. Over time merging is more efficient. 
+
+ 
+
+potential disadvantgae: searching multiple indexes and having to merge results. Makes true deletion worse, also vector filtering is possible. 
