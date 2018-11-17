@@ -37,3 +37,71 @@ However this technique does have certain disadvantages. We no longer have one in
 
 
 WE can use a distribited compute cluster like map reduce in combination with logarithmic merging by
+
+Solve for k & b
+
+b~ 0.5
+k = 30
+30,000 = k(1,000,000)^0.5
+
+b ~0.49
+k = 37
+
+GIGA word count = 948,683 950,000
+
+detailed work
+
+b ~0.501
+k~30.353
+
+GIGA word count = 980,000 spc. 979,945
+
+nearly perfect
+
+k = 21.863
+b = 0.5229
+
+GIGA word count = 1,111,245 terms
+
+5.
+217
+Binary = 1101 1001
+VB = 0000 0001 1101 1001
+
+Gamma
+offset = 101 1001
+length = 11111110
+Gamma code = 11111110, 1011001
+
+6. 11110100001111101010111000
+
+11110,1000 0 111110,10101 110,00
+
+1 1000 = 24
+0 = 1
+11 0101 =53
+100 = 4
+[24, 1, 53, 4] 
+
+
+K-Gram index
+pro
+more space efficient
+can solve multiple intersections 
+can return likelihood of search query (can control the accuracy)
+Con
+False positives many
+slower
+requires post-processing
+two inverted indexes (one of bi-grams with terms containing those bi-grams, and reg Inverted index)
+
+Permuterm index
+pro 
+faster
+no post-processing
+much less false positives
+
+con
+blows up the size of dictionary 
+only returns exact matches
+cannot process multiple intersections
