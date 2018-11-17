@@ -36,9 +36,4 @@ As a result of this logarithmic merging process, we will have many small merge o
 However this technique does have certain disadvantages. We no longer have one index, but many seperate indexes. This results in a slower query process. Likewise, we run into complications should we wish to remove terms or postings (although one can quickly compensate for this by passing query results through a filter).
 
 
-
-
-
-
-
-potential disadvantgae: searching multiple indexes and having to merge results. Makes true deletion worse, also vector filtering is possible. 
+WE can use a distribited compute cluster like map reduce in combination with logarithmic merging by
